@@ -2,33 +2,30 @@
 #include "starburst.h"
 
 /*
- * Given a ray index and a light index on that ray, return a
- * a (LEDaddr) structure that contains the corresponding LED
- * chain and LED on that chain.
- * If problematic arguments, return chain and light of -1
+ * Given a zero-relative ray index and a zero-relative light index
+ * on that ray, return a (LEDaddr) structure that contains the
+ * corresponding zero-relative LED chain and LED light on that chain.
+ * If problematic arguments, return chain or light of -1
  * (If you want to use exceptions, happy to do so.)
- * Arguments are 1-relative indices, so the both start at 1 (not 0).
  */
 Starburst::LEDaddr Starburst::getLEDaddr(int rayIndex, int lightIndex) {
     LEDaddr i; // the returned struct
 
 	// Verify that rayIndex does not exceed the number of rays
-	if (rayIndex > std::size(mRays)) {
+	if (rayIndex >= (sizeof(mRays)/sizeof(mRay))) {
         i.chain = -1; // Bad rayIndex
         i.light = 0;
         return i;
     }
 
-    // mRays array is zero indexed, but the rayIndex argument is 1-relative
-	mRay r = mRays[rayIndex - 1];
-
+	mRay r = mRays[rayIndex];
     i.chain = r.chain;
 	// Verify that lightIndex does not exceed the number of lights in this ray
-    if (lightIndex > r.numLights) {
+    if (lightIndex >= r.numLights) {
         i.light = -1; // Bad lightIndex
         return i;
     }
 
-    i.light = lightIndex + r.startLight - 1;
+    i.light = lightIndex + r.startLight;
     return i;
 };
