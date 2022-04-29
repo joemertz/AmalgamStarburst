@@ -41,7 +41,7 @@ private:
             {0, 60, 53}, 		// ray 1, chain 0, LEDs 60 to 112 (53 total)
             {0, 113, 48},		// ray 2
             {0, 161, 42},		// ray 3
-            {1, 0, 49},			// ray 4
+            {1, 0, 49},			// ray 4, chain 1, LEDs 0 to 48 (49 total)
             {1, 49, 54},		// ray 5
             {1, 103, 60},		// ray 6
             {1, 163, 63},		// ray 7
